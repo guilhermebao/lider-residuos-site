@@ -1,0 +1,75 @@
+@import 'tailwindcss';
+
+/* Tokens da direção B (Economia Circular) — ver handoff, seção 1 */
+@theme {
+  --color-forest: #0e3b2e;
+  --color-forest-dark: #08261d;
+  --color-forest-mid: #1b5040;
+  --color-sprout: #c6f05a;
+  --color-leaf: #2e7d55;
+  --color-leaf-text: #1f5c3e;
+  --color-bg: #f3f5ee;
+  --color-surface: #ffffff;
+  --color-tint: #e3eedc;
+  --color-photo: #dce6d3;
+  --color-line: #dce3d6;
+  --color-input: #b9c6b3;
+  --color-ink: #10241c;
+  --color-ink-2: #2c3f36;
+  --color-ink-muted: #4b5e55;
+  --color-on-forest: #ffffff;
+  --color-on-forest-2: #d3e0d8;
+  --color-on-forest-muted: #a9bdb2;
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Manrope', 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-lift: 0 12px 32px rgba(8, 38, 29, 0.12);
+
+  --radius-card: 24px;
+  --radius-card-md: 20px;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-bg font-sans text-ink antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display text-forest;
+    text-wrap: balance;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-leaf);
+    outline-offset: 2px;
+  }
+  summary {
+    list-style: none;
+  }
+  summary::-webkit-details-marker {
+    display: none;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-[1200px] px-4 md:px-6;
+  }
+  .kicker {
+    @apply text-[11px] font-semibold tracking-[0.12em] text-leaf-text uppercase md:text-[13px];
+  }
+  .h2 {
+    @apply text-[28px] leading-[1.1] font-extrabold md:text-[40px] md:leading-[1.08];
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
