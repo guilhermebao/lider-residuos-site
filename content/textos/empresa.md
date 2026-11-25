@@ -30,7 +30,7 @@ A Líder Resíduos é uma empresa de Belo Horizonte especializada em coleta, tra
 
 [CONFIRMAR ano de fundação e história: como a empresa começou, quem fundou e como cresceu]
 
-Nosso escritório fica na Av. do Contorno, na região central de BH, e contamos com frota própria de caminhões e equipamentos [CONFIRMAR endereço e área do pátio/galpão; o layout cita 3.000 m²].
+Nossa sede fica na Av. Ivair Nogueira do Pinho, em Betim, e contamos com frota própria de caminhões e equipamentos [CONFIRMAR área do pátio/galpão; o layout cita 3.000 m²].
 
 Trabalhamos com indústrias, construtoras, condomínios, clubes, hotéis, restaurantes e cozinhas industriais, sempre com um objetivo: que nenhum resíduo vá para o lugar errado.
 
@@ -57,7 +57,7 @@ Belo Horizonte, Contagem, Betim e região metropolitana: Nova Lima, Sabará, San
 
 ## FAQ
 **Onde fica a Líder Resíduos?**
-Na Av. do Contorno, 2905, Sala 405, Santa Efigênia, Belo Horizonte/MG [CONFIRMAR CEP: o site usa 30110-017 e o Google, 30110-001].
+Na Av. Ivair Nogueira do Pinho, 256, Betim/MG [CONFIRMAR bairro e CEP].
 
 **Qual o horário de atendimento?**
 [CONFIRMAR].

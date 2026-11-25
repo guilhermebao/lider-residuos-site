@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom'
-import { company, nav, whatsappHref } from '../../data/site'
+import { addressLines, company, nav, whatsappHref } from '../../data/site'
 
 const YEAR = new Date().getFullYear()
 
 export function Footer() {
-  const { address } = company
   return (
     <footer className="bg-forest-dark text-sm text-on-forest-muted">
       <div className="container-site flex flex-col gap-8 pt-12 pb-6">
@@ -31,10 +30,9 @@ export function Footer() {
             <a href={company.phone.href} className="hover:text-white">
               Fixo {company.phone.display}
             </a>
-            <span>{address.street.replace(', Sala', ' · Sala')}</span>
-            <span>
-              {address.district} · {address.city}/{address.state} · {address.zip}
-            </span>
+            {addressLines().map((l) => (
+              <span key={l}>{l}</span>
+            ))}
           </address>
 
           <nav aria-label="Rodapé" className="flex flex-col gap-2">
