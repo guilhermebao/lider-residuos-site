@@ -6,7 +6,7 @@ import { PageHero } from '../components/sections/PageHero'
 import { CtaBand, Faq, LinkGrid } from '../components/sections/shared'
 import { ContactForm } from '../components/sections/ContactForm'
 import { getPage } from '../content'
-import { company, whatsappHref } from '../data/site'
+import { addressLines, company, whatsappHref } from '../data/site'
 import { pageSchemas } from '../lib/schema'
 import { CitiesBlock, h2Section } from './ServicePage'
 
@@ -23,7 +23,7 @@ export function Component() {
   const email = channel(canais, 'E-mail')
   const horario = channel(canais, 'Horário')
   const { address } = company
-  const mapQuery = encodeURIComponent(`${address.street}, ${address.district}, ${address.city} - ${address.state}`)
+  const mapQuery = encodeURIComponent([address.street, address.district, `${address.city} - ${address.state}`].filter(Boolean).join(', '))
 
   return (
     <>
@@ -64,11 +64,11 @@ export function Component() {
               <address className="flex flex-col gap-0.5 not-italic">
                 <span className="text-[13px] font-semibold text-ink-muted">Endereço</span>
                 <span className="text-base leading-normal font-semibold">
-                  {address.street.replace(', Sala', ' · Sala')}
-                  <br />
-                  {address.district} · {address.city}/{address.state}
-                  <br />
-                  CEP {address.zip}
+                  {addressLines().map((l) => (
+                    <span key={l} className="block">
+                      {l}
+                    </span>
+                  ))}
                 </span>
               </address>
             </div>
@@ -111,7 +111,7 @@ export function Component() {
       <section className="bg-white">
         <div className="container-site py-10 md:py-16">
           <iframe
-            title="Mapa: Líder Resíduos na Av. do Contorno, Belo Horizonte"
+            title={`Mapa: Líder Resíduos — ${address.street}, ${address.city}/${address.state}`}
             src={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"

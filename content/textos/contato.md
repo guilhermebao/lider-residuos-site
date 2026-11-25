@@ -36,7 +36,7 @@ Para agilizar o orçamento, informe o tipo de material, o volume aproximado e o 
 - WhatsApp: (31) 99149-0544
 - Telefone: (31) 3531-3197
 - E-mail: [CONFIRMAR]
-- Endereço: Av. do Contorno, 2905, Sala 405, Santa Efigênia, Belo Horizonte/MG, CEP 30110-017 [CONFIRMAR CEP]
+- Endereço: Av. Ivair Nogueira do Pinho, 256, Betim/MG [CONFIRMAR bairro e CEP]
 - Horário: [CONFIRMAR]
 
 ### Formulário

@@ -6,7 +6,7 @@ import { Photo } from '../components/ui/Photo'
 import { SectionTitle } from '../components/ui/SectionTitle'
 import { ContactChannels, LinkGrid, Steps } from '../components/sections/shared'
 import { ContactForm } from '../components/sections/ContactForm'
-import { company } from '../data/site'
+import { addressLines, company } from '../data/site'
 import { clients, homeSeo, materials, popular, services, stats, statsAreIllustrative, steps } from '../data/home'
 import { localBusinessSchema } from '../lib/schema'
 
@@ -217,8 +217,7 @@ export function Component() {
             <div className="flex flex-col gap-0.5 px-5 py-1 text-[15px] text-ink-2">
               <span className="font-bold text-ink">Endereço</span>
               <span>
-                {company.address.street.replace(', Sala', ' · Sala')} · {company.address.district},{' '}
-                {company.address.city}/{company.address.state}
+                {addressLines().join(' · ')}
               </span>
             </div>
           </div>

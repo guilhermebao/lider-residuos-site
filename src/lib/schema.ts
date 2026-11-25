@@ -20,7 +20,7 @@ export function localBusinessSchema() {
       streetAddress: address.street,
       addressLocality: address.city,
       addressRegion: address.state,
-      postalCode: address.zip,
+      ...(address.zip ? { postalCode: address.zip } : {}),
       addressCountry: 'BR',
     },
     areaServed: company.areaServed.map((name) => ({ '@type': 'City', name })),
