@@ -4,8 +4,12 @@ import { sendForm } from '../../lib/sendForm'
 import { company, whatsappHref } from '../../data/site'
 
 interface Props {
-  /** full: 2 colunas com "Eu quero" (home/contato). compact: 1 coluna (lateral das páginas de serviço). */
-  variant?: 'full' | 'compact'
+  /**
+   * full: 2 colunas com "Eu quero" (home).
+   * contact: 2 colunas com e-mail e cidade (página Contato).
+   * compact: 1 coluna (lateral das páginas de serviço).
+   */
+  variant?: 'full' | 'contact' | 'compact'
   origin: string
   submitLabel?: string
 }
@@ -13,11 +17,48 @@ interface Props {
 const inputCls =
   'h-12 w-full rounded-xl border border-input bg-white px-3.5 text-base font-normal text-ink outline-none transition focus:border-leaf focus:ring-2 focus:ring-leaf/30'
 
+const interestOptions = {
+  full: ['Descartar resíduos', 'Vender sucata', 'Alugar equipamento'],
+  contact: ['Descartar resíduos', 'Vender sucata ou recicláveis', 'Alugar equipamento', 'Outro'],
+}
+
+type Field = {
+  name: string
+  label: string
+  type?: string
+  autoComplete?: string
+  required?: boolean
+  wide?: boolean
+  kind?: 'input' | 'select' | 'textarea'
+  options?: string[]
+}
+
+function fieldsFor(variant: NonNullable<Props['variant']>): Field[] {
+  const nome: Field = { name: 'nome', label: 'Nome', autoComplete: 'name', required: true }
+  const empresa: Field = { name: 'empresa', label: 'Empresa', autoComplete: 'organization' }
+  const telefone: Field = { name: 'telefone', label: 'Telefone / WhatsApp', type: 'tel', autoComplete: 'tel', required: true }
+  const mensagem: Field = { name: 'mensagem', label: 'Tipo e volume do resíduo', kind: 'textarea', wide: true }
+
+  if (variant === 'compact') return [nome, empresa, telefone, mensagem]
+  if (variant === 'contact')
+    return [
+      nome,
+      empresa,
+      telefone,
+      { name: 'email', label: 'E-mail', type: 'email', autoComplete: 'email' },
+      { name: 'cidade', label: 'Cidade', autoComplete: 'address-level2' },
+      { name: 'interesse', label: 'O que você precisa', kind: 'select', options: interestOptions.contact },
+      { ...mensagem, label: 'Mensagem' },
+    ]
+  return [nome, empresa, telefone, { name: 'interesse', label: 'Eu quero', kind: 'select', options: interestOptions.full }, mensagem]
+}
+
 export function ContactForm({ variant = 'full', origin, submitLabel = 'Enviar pedido de orçamento' }: Props) {
   const id = useId()
   const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
   const [error, setError] = useState('')
-  const full = variant === 'full'
+  const twoCols = variant !== 'compact'
+  const wide = twoCols ? 'sm:col-span-2' : ''
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -47,69 +88,41 @@ export function ContactForm({ variant = 'full', origin, submitLabel = 'Enviar pe
     )
   }
 
-  const field = (name: string) => `${id}-${name}`
-  const span = full ? 'sm:col-span-1' : ''
-
   return (
-    <form
-      onSubmit={onSubmit}
-      className={`grid grid-cols-1 gap-4 rounded-[24px] bg-white p-6 md:p-8 ${full ? 'sm:grid-cols-2' : ''}`}
-    >
-      <div className={`flex flex-col gap-1.5 ${span}`}>
-        <label htmlFor={field('nome')} className="text-sm font-semibold">
-          Nome
-        </label>
-        <input id={field('nome')} name="nome" type="text" autoComplete="name" required className={inputCls} />
-      </div>
-      <div className={`flex flex-col gap-1.5 ${span}`}>
-        <label htmlFor={field('empresa')} className="text-sm font-semibold">
-          Empresa
-        </label>
-        <input id={field('empresa')} name="empresa" type="text" autoComplete="organization" className={inputCls} />
-      </div>
-      <div className={`flex flex-col gap-1.5 ${span}`}>
-        <label htmlFor={field('telefone')} className="text-sm font-semibold">
-          Telefone / WhatsApp
-        </label>
-        <input
-          id={field('telefone')}
-          name="telefone"
-          type="tel"
-          inputMode="tel"
-          autoComplete="tel"
-          required
-          className={inputCls}
-        />
-      </div>
-      {full && (
-        <div className={`flex flex-col gap-1.5 ${span}`}>
-          <label htmlFor={field('interesse')} className="text-sm font-semibold">
-            Eu quero
-          </label>
-          <select id={field('interesse')} name="interesse" className={inputCls}>
-            <option>Descartar resíduos</option>
-            <option>Vender sucata</option>
-            <option>Alugar equipamento</option>
-          </select>
-        </div>
-      )}
-      <div className={`flex flex-col gap-1.5 ${full ? 'sm:col-span-2' : ''}`}>
-        <label htmlFor={field('mensagem')} className="text-sm font-semibold">
-          Tipo e volume do resíduo
-        </label>
-        <textarea
-          id={field('mensagem')}
-          name="mensagem"
-          rows={4}
-          className={`${inputCls} h-auto resize-y py-3`}
-        />
-      </div>
+    <form onSubmit={onSubmit} className={`grid grid-cols-1 gap-4 rounded-[24px] bg-white p-6 md:p-8 ${twoCols ? 'sm:grid-cols-2' : ''}`}>
+      {fieldsFor(variant).map((f) => {
+        const fid = `${id}-${f.name}`
+        return (
+          <div key={f.name} className={`flex flex-col gap-1.5 ${f.wide ? wide : ''}`}>
+            <label htmlFor={fid} className="text-sm font-semibold">
+              {f.label}
+            </label>
+            {f.kind === 'select' ? (
+              <select id={fid} name={f.name} className={inputCls}>
+                {f.options?.map((o) => <option key={o}>{o}</option>)}
+              </select>
+            ) : f.kind === 'textarea' ? (
+              <textarea id={fid} name={f.name} rows={4} className={`${inputCls} h-auto resize-y py-3`} />
+            ) : (
+              <input
+                id={fid}
+                name={f.name}
+                type={f.type ?? 'text'}
+                inputMode={f.type === 'tel' ? 'tel' : undefined}
+                autoComplete={f.autoComplete}
+                required={f.required}
+                className={inputCls}
+              />
+            )}
+          </div>
+        )
+      })}
 
       {/* honeypot anti-spam */}
       <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
 
       {status === 'error' && (
-        <p role="alert" className={`text-sm text-red-700 ${full ? 'sm:col-span-2' : ''}`}>
+        <p role="alert" className={`text-sm text-red-700 ${wide}`}>
           Não foi possível enviar ({error}). Tente de novo ou fale pelo{' '}
           <a href={whatsappHref()} className="font-bold underline" target="_blank" rel="noopener noreferrer">
             WhatsApp {company.whatsapp.display}
@@ -121,9 +134,7 @@ export function ContactForm({ variant = 'full', origin, submitLabel = 'Enviar pe
       <button
         type="submit"
         disabled={status === 'sending'}
-        className={`h-[54px] rounded-full bg-forest text-base font-bold text-white transition hover:bg-forest-dark disabled:opacity-60 ${
-          full ? 'sm:col-span-2' : ''
-        }`}
+        className={`h-[54px] rounded-full bg-forest text-base font-bold text-white transition hover:bg-forest-dark disabled:opacity-60 ${wide}`}
       >
         {status === 'sending' ? 'Enviando…' : submitLabel}
       </button>

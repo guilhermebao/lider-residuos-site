@@ -5,11 +5,132 @@
   "outputDirectory": "dist",
   "cleanUrls": true,
   "trailingSlash": false,
-  "redirects": [],
+  "redirects": [
+    {
+      "source": "/empresa-coleta-residuos",
+      "destination": "/empresa-coleta-residuos-industriais",
+      "permanent": true
+    },
+    {
+      "source": "/empresa-gestao-residuos",
+      "destination": "/empresa-gerenciamento-residuos",
+      "permanent": true
+    },
+    {
+      "source": "/gerenciamento-residuos-industriais",
+      "destination": "/empresa-gerenciamento-residuos",
+      "permanent": true
+    },
+    {
+      "source": "/comprar-sucata-papelao",
+      "destination": "/compra-venda-sucata-papelao",
+      "permanent": true
+    },
+    {
+      "source": "/aluguel-prensa-reciclagem",
+      "destination": "/aluguel-prensa-enfardadeira-reciclagem",
+      "permanent": true
+    },
+    {
+      "source": "/empresa-que-compra-pallets",
+      "destination": "/empresa-que-compra-paletes-madeira",
+      "permanent": true
+    },
+    {
+      "source": "/compra-sucata-eletronica",
+      "destination": "/empresa-que-compra-sucata-eletronica",
+      "permanent": true
+    },
+    {
+      "source": "/empresa-que-compra-cobre",
+      "destination": "/compra-sucata-cobre",
+      "permanent": true
+    },
+    {
+      "source": "/empresa-que-compra-sucata-cobre",
+      "destination": "/compra-sucata-cobre",
+      "permanent": true
+    },
+    {
+      "source": "/destinacao-final-residuos-solidos-industriais",
+      "destination": "/destinacao-residuos-industriais",
+      "permanent": true
+    },
+    {
+      "source": "/compra-sucata-inox",
+      "destination": "/compra-sucata-aco-inox",
+      "permanent": true
+    },
+    {
+      "source": "/empresa-que-compra-sucata-inox",
+      "destination": "/compra-sucata-aco-inox",
+      "permanent": true
+    },
+    {
+      "source": "/aluguel-retroescavadeira-pequena",
+      "destination": "/aluguel-retroescavadeira-preco",
+      "permanent": true
+    },
+    {
+      "source": "/transporte-residuos-solidos-da-construcao-civil",
+      "destination": "/destinacao-residuos-da-construcao-civil",
+      "permanent": true
+    },
+    {
+      "source": "/comercio-atacadista-residuos-sucatas-metalicos",
+      "destination": "/compra-venda-sucata",
+      "permanent": true
+    },
+    {
+      "source": "/comercio-varejista-sucata",
+      "destination": "/compra-venda-sucata",
+      "permanent": true
+    },
+    {
+      "source": "/comercio-reciclaveis",
+      "destination": "/comercio-reciclagem",
+      "permanent": true
+    },
+    {
+      "source": "/comercio-residuos",
+      "destination": "/comercio-reciclagem",
+      "permanent": true
+    },
+    {
+      "source": "/compradores-sucata-metal",
+      "destination": "/compra-sucata-metalica",
+      "permanent": true
+    },
+    {
+      "source": "/destinacao-residuos",
+      "destination": "/destinacao-final-residuos",
+      "permanent": true
+    },
+    {
+      "source": "/empresas-descarte-residuos",
+      "destination": "/destinacao-final-residuos",
+      "permanent": true
+    },
+    {
+      "source": "/software-gerenciamento-residuos",
+      "destination": "/software-gestao-residuos",
+      "permanent": true
+    },
+    {
+      "source": "/vender-sucata",
+      "destination": "/compra-venda-sucata",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
   ]
 }

@@ -79,7 +79,7 @@ export function Component() {
               <span className="font-bold text-forest">Solicitar coleta →</span>
             </Link>
             <Link
-              to="/vender-sucata"
+              to="/compra-venda-sucata"
               className="flex flex-col gap-2 rounded-[20px] bg-sprout p-[22px] shadow-lift transition hover:-translate-y-0.5 md:gap-2.5 md:rounded-[24px] md:p-8"
             >
               <span className="text-xs font-bold tracking-[0.08em] text-forest uppercase md:text-[13px]">
