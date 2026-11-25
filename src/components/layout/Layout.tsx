@@ -3,6 +3,7 @@ import { Topbar } from './Topbar'
 import { Header } from './Header'
 import { Footer } from './Footer'
 import { MobileStickyBar } from './MobileStickyBar'
+import { RouteTracker } from './RouteTracker'
 
 export function Layout() {
   const matches = useMatches() as { handle?: { servicePage?: boolean } }[]
@@ -27,6 +28,7 @@ export function Layout() {
       </div>
       <MobileStickyBar />
       <ScrollRestoration />
+      <RouteTracker />
     </>
   )
 }
