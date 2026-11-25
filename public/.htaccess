@@ -9,6 +9,32 @@ RewriteEngine On
 RewriteCond %{HTTPS} off
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+# >>> redirects (gerado por npm run redirects)
+RewriteRule ^empresa-coleta-residuos/?$ /empresa-coleta-residuos-industriais [R=301,L]
+RewriteRule ^empresa-gestao-residuos/?$ /empresa-gerenciamento-residuos [R=301,L]
+RewriteRule ^gerenciamento-residuos-industriais/?$ /empresa-gerenciamento-residuos [R=301,L]
+RewriteRule ^comprar-sucata-papelao/?$ /compra-venda-sucata-papelao [R=301,L]
+RewriteRule ^aluguel-prensa-reciclagem/?$ /aluguel-prensa-enfardadeira-reciclagem [R=301,L]
+RewriteRule ^empresa-que-compra-pallets/?$ /empresa-que-compra-paletes-madeira [R=301,L]
+RewriteRule ^compra-sucata-eletronica/?$ /empresa-que-compra-sucata-eletronica [R=301,L]
+RewriteRule ^empresa-que-compra-cobre/?$ /compra-sucata-cobre [R=301,L]
+RewriteRule ^empresa-que-compra-sucata-cobre/?$ /compra-sucata-cobre [R=301,L]
+RewriteRule ^destinacao-final-residuos-solidos-industriais/?$ /destinacao-residuos-industriais [R=301,L]
+RewriteRule ^compra-sucata-inox/?$ /compra-sucata-aco-inox [R=301,L]
+RewriteRule ^empresa-que-compra-sucata-inox/?$ /compra-sucata-aco-inox [R=301,L]
+RewriteRule ^aluguel-retroescavadeira-pequena/?$ /aluguel-retroescavadeira-preco [R=301,L]
+RewriteRule ^transporte-residuos-solidos-da-construcao-civil/?$ /destinacao-residuos-da-construcao-civil [R=301,L]
+RewriteRule ^comercio-atacadista-residuos-sucatas-metalicos/?$ /compra-venda-sucata [R=301,L]
+RewriteRule ^comercio-varejista-sucata/?$ /compra-venda-sucata [R=301,L]
+RewriteRule ^comercio-reciclaveis/?$ /comercio-reciclagem [R=301,L]
+RewriteRule ^comercio-residuos/?$ /comercio-reciclagem [R=301,L]
+RewriteRule ^compradores-sucata-metal/?$ /compra-sucata-metalica [R=301,L]
+RewriteRule ^destinacao-residuos/?$ /destinacao-final-residuos [R=301,L]
+RewriteRule ^empresas-descarte-residuos/?$ /destinacao-final-residuos [R=301,L]
+RewriteRule ^software-gerenciamento-residuos/?$ /software-gestao-residuos [R=301,L]
+RewriteRule ^vender-sucata/?$ /compra-venda-sucata [R=301,L]
+# <<< redirects
+
 # Remove barra final (/pagina/ -> /pagina), igual à Vercel
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.+)/$ /$1 [L,R=301]
@@ -18,8 +44,6 @@ RewriteCond %{REQUEST_FILENAME} -d
 RewriteCond %{REQUEST_FILENAME}/index.html -f
 RewriteRule ^(.+)$ /$1/index.html [L]
 
-# Redirecionamentos 301 das páginas antigas (preencher após o levantamento no Search Console)
-# Redirect 301 /pagina-antiga /empresa-coleta-residuos-industriais
 
 <IfModule mod_expires.c>
   ExpiresActive On

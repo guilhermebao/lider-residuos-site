@@ -32,7 +32,6 @@ src/
   data/
     site.ts                 telefone, WhatsApp, endereço, menu, páginas previstas
     home.ts                 conteúdo da home
-    servicos/               uma página de SEO por arquivo + index.ts (registro)
   pages/
     Home.tsx
     ServicePage.tsx         modelo de página de serviço
@@ -44,13 +43,18 @@ src/
   lib/                      schema.org (LocalBusiness, FAQPage, Breadcrumb, Service) e envio de formulário
 ```
 
-## Nova página de serviço (SEO)
+## Textos das páginas
 
-1. Copiar `src/data/servicos/coleta-residuos-industriais.ts` com o slug da URL atual.
-2. Preencher conteúdo, title e meta description.
-3. Registrar em `src/data/servicos/index.ts`.
+Todo o conteúdo das páginas internas vem de `content/textos/<url>.md`, gerados no chat de textos do projeto (docs `claude/textos/` no claude.ai) no formato da seção 4 do handoff. O parser fica em `src/content/parse.ts`.
 
-A rota, o sitemap, o schema `FAQPage` e o breadcrumb são gerados automaticamente.
+- **Atualizar um texto:** substituir o `.md` e fazer o build.
+- **Nova página de serviço:** criar `content/textos/<url>.md` no mesmo formato. Rota, sitemap, breadcrumb e schema (Service + FAQPage) são gerados automaticamente.
+- `servicos.md`, `empresa.md` e `contato.md` usam layouts próprios (`src/pages/`).
+- Trechos `[CONFIRMAR ...]` aparecem destacados em amarelo para o cliente validar. Ficam fora do title, da meta e do schema FAQPage.
+
+## Redirecionamentos 301
+
+Lista em `content/redirects.json`. Depois de editar, rodar `npm run redirects` para atualizar `vercel.json` e `public/.htaccess`.
 
 ## Fotos
 
@@ -66,5 +70,5 @@ As fotos do quadro são de banco e não vão para o site. Enquanto as fotos reai
 - Logo em vetor (hoje PNG extraído do JPG) → trocar `public/img/` e favicons
 - Números reais da faixa de números (`data/home.ts`, `statsAreIllustrative`)
 - Horário de atendimento → `openingHoursSpecification` no schema
-- URLs reais das páginas de SEO nos links "Mais procurados" e "Serviços relacionados" (marcadas com TODO)
-- Textos de SEO das páginas de serviço
+- Itens `[CONFIRMAR]` nos textos (`grep -rn CONFIRMAR content/textos`)
+- Licença Classe I: sem ela, remover os 3 textos de perigosos/químicos e redirecionar para /destinacao-residuos-industriais

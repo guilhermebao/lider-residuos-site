@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite-react-ssg build",
     "lint": "oxlint",
-    "preview": "npx serve dist"
+    "preview": "npx serve dist",
+    "redirects": "node scripts/sync-redirects.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.77.0",

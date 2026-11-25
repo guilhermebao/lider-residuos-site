@@ -1,4 +1,4 @@
-import type { ServiceLink, Step } from './servicos/types'
+import type { LinkItem as ServiceLink, Step } from '../content/types'
 
 export const homeSeo = {
   title: 'Líder Resíduos | Coleta e Gestão de Resíduos em BH, Contagem e Betim',
@@ -26,19 +26,19 @@ export const services = [
   {
     title: 'Comércio de recicláveis',
     text: 'Compra e venda de sucata metálica e não ferrosa, papelão e plásticos, além de reciclagem de madeira.',
-    href: '/comercio-reciclaveis',
+    href: '/comercio-reciclagem',
     photo: 'Foto: sucata separada no pátio',
   },
   {
     title: 'Destinação especializada',
     text: 'Tambores, bombonas, coprocessamento, incineração, big bags, desmobilização e descaracterização.',
-    href: '/servicos',
+    href: '/destinacao-residuos-industriais',
     photo: 'Foto: equipe com EPI na triagem',
   },
   {
     title: 'Equipamentos e locação',
     text: 'Caminhões, caçambas de vários volumes, munck, trituradores, moinhos, prensas e retroescavadeiras.',
-    href: '/servicos',
+    href: '/servicos#aluguel-de-equipamentos',
     photo: 'Foto: munck e caçambas',
   },
 ]
@@ -68,10 +68,9 @@ export const clients = [
   { icon: 'kitchen', name: 'Cozinhas industriais', text: 'Grandes volumes de orgânicos e embalagens' },
 ] as const
 
-// TODO: apontar para as URLs reais após o levantamento no Search Console
 export const popular: ServiceLink[] = [
   { label: 'Coleta de resíduos industriais', href: '/empresa-coleta-residuos-industriais' },
-  { label: 'Aluguel de caminhão munck', href: '/servicos' },
-  { label: 'Software de gestão de resíduos', href: '/servicos' },
-  { label: 'Destinação de resíduos sólidos industriais', href: '/servicos' },
+  { label: 'Aluguel de caçamba', href: '/aluguel-cacamba-valor' },
+  { label: 'Compra e venda de sucata', href: '/compra-venda-sucata' },
+  { label: 'Aluguel de caminhão munck', href: '/preco-locacao-caminhao-munck' },
 ]

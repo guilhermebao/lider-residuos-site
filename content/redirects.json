@@ -1,0 +1,28 @@
+{
+  "_comentario": "Redirecionamentos 301 das URLs antigas (fonte: claude/textos/_indice.md). Depois de editar, rode `npm run redirects` para atualizar vercel.json e public/.htaccess.",
+  "redirects": {
+    "/empresa-coleta-residuos": "/empresa-coleta-residuos-industriais",
+    "/empresa-gestao-residuos": "/empresa-gerenciamento-residuos",
+    "/gerenciamento-residuos-industriais": "/empresa-gerenciamento-residuos",
+    "/comprar-sucata-papelao": "/compra-venda-sucata-papelao",
+    "/aluguel-prensa-reciclagem": "/aluguel-prensa-enfardadeira-reciclagem",
+    "/empresa-que-compra-pallets": "/empresa-que-compra-paletes-madeira",
+    "/compra-sucata-eletronica": "/empresa-que-compra-sucata-eletronica",
+    "/empresa-que-compra-cobre": "/compra-sucata-cobre",
+    "/empresa-que-compra-sucata-cobre": "/compra-sucata-cobre",
+    "/destinacao-final-residuos-solidos-industriais": "/destinacao-residuos-industriais",
+    "/compra-sucata-inox": "/compra-sucata-aco-inox",
+    "/empresa-que-compra-sucata-inox": "/compra-sucata-aco-inox",
+    "/aluguel-retroescavadeira-pequena": "/aluguel-retroescavadeira-preco",
+    "/transporte-residuos-solidos-da-construcao-civil": "/destinacao-residuos-da-construcao-civil",
+    "/comercio-atacadista-residuos-sucatas-metalicos": "/compra-venda-sucata",
+    "/comercio-varejista-sucata": "/compra-venda-sucata",
+    "/comercio-reciclaveis": "/comercio-reciclagem",
+    "/comercio-residuos": "/comercio-reciclagem",
+    "/compradores-sucata-metal": "/compra-sucata-metalica",
+    "/destinacao-residuos": "/destinacao-final-residuos",
+    "/empresas-descarte-residuos": "/destinacao-final-residuos",
+    "/software-gerenciamento-residuos": "/software-gestao-residuos",
+    "/vender-sucata": "/compra-venda-sucata"
+  }
+}

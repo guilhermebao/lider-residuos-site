@@ -27,15 +27,7 @@ export const nav = [
   { label: 'Home', href: '/' },
   { label: 'Empresa', href: '/empresa' },
   { label: 'Serviços', href: '/servicos' },
-  { label: 'Vender sucata', href: '/vender-sucata' },
+  { label: 'Vender sucata', href: '/compra-venda-sucata' },
   { label: 'Contato', href: '/contato' },
 ] as const
 
-/** Páginas previstas que ainda não foram desenvolvidas (exibem "em desenvolvimento"). */
-export const plannedPages = [
-  { path: '/servicos', title: 'Serviços' },
-  { path: '/comercio-reciclaveis', title: 'Comércio de recicláveis' },
-  { path: '/vender-sucata', title: 'Vender sucata' },
-  { path: '/empresa', title: 'Empresa' },
-  { path: '/contato', title: 'Contato' },
-] as const

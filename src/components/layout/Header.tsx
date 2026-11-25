@@ -10,7 +10,9 @@ function useIsActive() {
   const { pathname } = useLocation()
   return (href: string, isServicePage: boolean) => {
     if (href === '/') return pathname === '/'
-    if (href === '/servicos' && isServicePage) return true
+    // uma página de serviço ativa "Serviços", a menos que ela própria esteja no menu (ex.: Vender sucata)
+    const inNav = nav.some((i) => i.href !== '/' && pathname === i.href)
+    if (href === '/servicos' && isServicePage && !inNav) return true
     return pathname === href || pathname.startsWith(`${href}/`)
   }
 }

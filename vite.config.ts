@@ -1,10 +1,13 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
-import { copyFileSync, existsSync, writeFileSync } from 'node:fs'
+import { copyFileSync, existsSync, readdirSync, writeFileSync } from 'node:fs'
 import type {} from 'vite-react-ssg'
 import { join } from 'node:path'
-import { SITE_URL, sitemapPaths } from './src/data/sitemap.ts'
+
+const SITE_URL = (process.env.VITE_SITE_URL || 'https://www.liderresiduos.com.br').replace(/\/$/, '')
+// Todas as páginas com texto em content/textos + home
+const sitemapPaths = ['/', ...readdirSync('content/textos').filter((f) => f.endsWith('.md')).map((f) => `/${f.replace(/\.md$/, '')}`)]
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],

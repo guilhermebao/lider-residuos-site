@@ -1,6 +1,7 @@
 import { company } from '../data/site'
 import { SITE_URL } from '../data/sitemap'
-import type { Faq } from '../data/servicos/types'
+import type { Faq, PageContent } from '../content/types'
+import { hasConfirm, stripConfirm } from '../content/parse'
 
 export function localBusinessSchema() {
   const { address } = company
@@ -27,14 +28,17 @@ export function localBusinessSchema() {
   }
 }
 
+/** Só entram no schema perguntas com resposta já confirmada (sem [CONFIRMAR]). */
 export function faqSchema(faq: Faq[]) {
+  const ready = faq.filter((f) => !hasConfirm(f.a) && stripConfirm(f.a).length > 0)
+  if (!ready.length) return null
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: faq.map((f) => ({
+    mainEntity: ready.map((f) => ({
       '@type': 'Question',
       name: f.q,
-      acceptedAnswer: { '@type': 'Answer', text: f.a },
+      acceptedAnswer: { '@type': 'Answer', text: f.a.replace(/\*\*/g, '') },
     })),
   }
 }
@@ -62,4 +66,17 @@ export function serviceSchema(name: string, description: string, path: string) {
     provider: { '@id': `${SITE_URL}/#empresa` },
     areaServed: company.areaServed.map((n) => ({ '@type': 'City', name: n })),
   }
+}
+
+/** Schemas padrão de uma página de conteúdo. */
+export function pageSchemas(page: PageContent, opts: { service?: boolean; localBusiness?: boolean } = {}) {
+  const crumbs = [{ name: 'Home', path: '/' }]
+  if (opts.service) crumbs.push({ name: 'Serviços', path: '/servicos' })
+  crumbs.push({ name: page.breadcrumb, path: page.path })
+  return [
+    ...(opts.service || opts.localBusiness ? [localBusinessSchema()] : []),
+    ...(opts.service ? [serviceSchema(stripConfirm(page.h1), page.seo.description, page.path)] : []),
+    breadcrumbSchema(crumbs),
+    faqSchema(page.faq),
+  ].filter(Boolean) as object[]
 }

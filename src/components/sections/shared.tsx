@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ChevronDown, Phone } from 'lucide-react'
-import type { Faq as FaqItem, ServiceLink, Step } from '../../data/servicos/types'
+import type { Faq as FaqItem, LinkItem as ServiceLink, Step } from '../../content/types'
+import { Rich } from '../ui/Rich'
 import { company, whatsappHref } from '../../data/site'
 import { WhatsAppIcon } from '../ui/icons'
 import { Button } from '../ui/Button'
@@ -18,7 +19,9 @@ export function Steps({ steps, layout = 'row' }: { steps: Step[]; layout?: 'row'
             </span>
             <div className="flex flex-col gap-0.5">
               <h3 className="font-sans text-base font-bold text-ink">{s.title}</h3>
-              <p className="text-sm leading-snug text-ink-2">{s.text}</p>
+              <p className="text-sm leading-snug text-ink-2">
+                <Rich text={s.text} />
+              </p>
             </div>
           </li>
         ))}
@@ -32,7 +35,9 @@ export function Steps({ steps, layout = 'row' }: { steps: Step[]; layout?: 'row'
           >
             <span className="font-display text-[30px] font-extrabold text-leaf">{String(i + 1).padStart(2, '0')}</span>
             <h3 className="font-display text-lg font-extrabold text-ink">{s.title}</h3>
-            <p className="text-[15px] leading-normal text-ink-2">{s.text}</p>
+            <p className="text-[15px] leading-normal text-ink-2">
+              <Rich text={s.text} />
+            </p>
           </li>
         ))}
       </ol>
@@ -50,7 +55,9 @@ export function Faq({ items }: { items: FaqItem[] }) {
             {f.q}
             <ChevronDown size={20} className="shrink-0 text-leaf transition group-open:rotate-180" aria-hidden="true" />
           </summary>
-          <p className="mt-2.5 text-[15px] leading-relaxed text-ink-2">{f.a}</p>
+          <p className="mt-2.5 text-[15px] leading-relaxed text-ink-2">
+            <Rich text={f.a} />
+          </p>
         </details>
       ))}
     </div>
@@ -60,7 +67,7 @@ export function Faq({ items }: { items: FaqItem[] }) {
 /* ---------- Lista de links (Mais procurados / Serviços relacionados) ---------- */
 export function LinkGrid({ links, tone = 'bg' }: { links: ServiceLink[]; tone?: 'bg' | 'white' }) {
   return (
-    <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+    <ul className={`grid grid-cols-1 gap-3 sm:grid-cols-2 ${links.length === 3 ? 'lg:grid-cols-3' : 'lg:grid-cols-4'}`}>
       {links.map((l) => (
         <li key={l.label}>
           <Link

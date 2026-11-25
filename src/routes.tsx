@@ -2,8 +2,7 @@ import type { RouteRecord } from 'vite-react-ssg'
 import { Layout } from './components/layout/Layout'
 import { ServicePage } from './pages/ServicePage'
 import { EmBreve } from './pages/EmBreve'
-import { servicePages } from './data/servicos'
-import { plannedPages } from './data/site'
+import { servicePages } from './content'
 
 export const routes: RouteRecord[] = [
   {
@@ -12,18 +11,15 @@ export const routes: RouteRecord[] = [
     entry: 'src/components/layout/Layout.tsx',
     children: [
       { index: true, lazy: () => import('./pages/Home') },
+      { path: 'servicos', lazy: () => import('./pages/Servicos'), handle: { servicePage: true } },
+      { path: 'empresa', lazy: () => import('./pages/Empresa') },
+      { path: 'contato', lazy: () => import('./pages/Contato') },
 
-      // Páginas de serviço (uma rota estática por slug, mantendo as URLs atuais)
+      // Páginas de serviço: uma rota estática por arquivo em content/textos (mantém as URLs atuais)
       ...servicePages.map((page) => ({
         path: page.slug,
         element: <ServicePage page={page} />,
         handle: { servicePage: true },
-      })),
-
-      // Seções previstas ainda não desenvolvidas
-      ...plannedPages.map((p) => ({
-        path: p.path.slice(1),
-        element: <EmBreve title={p.title} />,
       })),
 
       { path: '404', element: <EmBreve title="Página não encontrada" notFound /> },
